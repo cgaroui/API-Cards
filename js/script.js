@@ -1,3 +1,8 @@
+
+//La fonction "callAPI" envoie une requête HTTP à une URI donnée, attend la réponse,
+// la convertit en JSON,
+// et retourne les données obtenues.
+
 async function callAPI(uri){
     const response = await fetch(uri);
     const data = await response.json();
@@ -29,6 +34,11 @@ async function drawCard(){
     return await callAPI(getApiEndpointDrawCard());
 }
 
+
+
+//---------------------------------------
+// creation de la fonction actionreset
+//-----------------------------------------
 
 //supprime les cartes de l'ancien deck du DOM  => récupere des cartes et le foreach pour supprimer chaque carte récupéré 
 const cleanDomCardsFromPreviousDeck = () => document.querySelectorAll(".card").forEach((child) => child.remove());
