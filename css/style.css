@@ -56,7 +56,7 @@ button:hover {
     animation: fadeInUp 0.5s ease-out;
 }
 
-/* Animation fade-in + slide-up */
+/* Animation fade-in + slide-up sur le reset et le draw*/
 @keyframes fadeInUp {
     from {
         opacity: 0;
