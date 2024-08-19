@@ -29,8 +29,11 @@ async function drawCard(){
     return await callAPI(getApiEndpointDrawCard());
 }
 
+
+//supprime les cartes de l'ancien deck du DOM  => récupere des cartes et le foreach pour supprimer chaque carte récupéré 
 const cleanDomCardsFromPreviousDeck = () => document.querySelectorAll(".card").forEach((child) => child.remove());
 
+//fonction rénitialisation (nv deck +melange du nv deck)
 async function actionReset() {
     cleanDomCardsFromPreviousDeck();
 
@@ -39,3 +42,36 @@ async function actionReset() {
 
     await shuffleDeck();
 }
+
+
+//---------------------------------------
+// creation de la fonction actiondraw
+//-----------------------------------------
+
+const cardsContainer = document.getElementById("cards-container");
+
+function addCardToDomByImgUri(imgUri) {
+    const imgCardHtmlElement = document.createElement("img");
+    imgCardHtmlElement.classList.add("card");
+    imgCardHtmlElement.src = imgUri;
+
+    cardsContainer.append(imgCardHtmlElement);
+}
+
+async function actionDraw() {
+    const drawCardResponse = await drawCard();
+    const imgCardUri = drawCardResponse.cards[0].image;
+
+    addCardToDomByImgUri(imgCardUri);
+}
+
+//---------------------------------------
+// ecouteurs d'événements 
+//-----------------------------------------
+
+const actionResetButton = document.getElementById("action-reset");
+const actionDrawButton = document.getElementById("action-draw");
+
+//ecouteurs d'événement sur les boutons d'action
+actionResetButton.addEventListener("click", actionReset);
+actionDrawButton.addEventListener("click", actionDraw);
