@@ -28,3 +28,14 @@ let getApiEndpointDrawCard = () =>`https://deckofcardsapi.com/api/deck/${idDeck}
 async function drawCard(){
     return await callAPI(getApiEndpointDrawCard());
 }
+
+const cleanDomCardsFromPreviousDeck = () => document.querySelectorAll(".card").forEach((child) => child.remove());
+
+async function actionReset() {
+    cleanDomCardsFromPreviousDeck();
+
+    const newDeckResponse = await getNewDeck();
+    idDeck = newDeckResponse.deck_id;
+
+    await shuffleDeck();
+}
